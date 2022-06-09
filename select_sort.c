@@ -58,6 +58,6 @@ int main(){
     printf("Vetor ordenado: ");
     print_vet(vet, n);
     printf("\n");
-
+    
     return 0;
 }

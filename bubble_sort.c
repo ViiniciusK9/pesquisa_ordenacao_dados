@@ -1,20 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
+#include <sys\timeb.h>
 
 void ordenar(int* vet, int n){
-    int i, j, aux;
+    long long int i, j, aux, comparacoes = 0, troca = 0;
 
     for(i = 1; i < n; i++){
         for(j = 0; j < n-i; j++){
+            comparacoes++;
+
             if(vet[j] > vet[j+1]){
+                troca++;
+
                 aux = vet[j+1];
                 vet[j+1] = vet[j];
                 vet[j] = aux;
             }
         }
     }
+
+    printf("Quantidade de comparacoes: %d\n", comparacoes);
+    printf("Quantidade de trocas: %d\n", troca);
 }
 
 
@@ -30,6 +37,9 @@ void print_vet(int* vet, int n){
 int main(){
     int n, i;
     int *vet;
+    struct timeb start, end;
+    int diff;
+    
 
     scanf("%d", &n);
 
@@ -39,17 +49,22 @@ int main(){
         scanf("%d", &vet[i]);
     }
 
-    printf("Vetor: ");
-    print_vet(vet, n);
-    printf("\n");
+    //printf("Vetor: ");
+    //print_vet(vet, n);
+    //printf("\n");
+
+    ftime(&start);
 
     ordenar(vet, n);
 
-    printf("Vetor ordenado: ");
-    print_vet(vet, n);
-    printf("\n");
+    ftime(&end);
+    diff = (int) (1000.0 * (end.time - start.time) + (end.millitm - start.millitm));
 
+    printf("\nGastou %u milisegundos\n", diff);    
 
+    //printf("Vetor ordenado: ");
+    //print_vet(vet, n);
+    //printf("\n");
     return 0;
 }
 
