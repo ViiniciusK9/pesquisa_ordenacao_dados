@@ -20,8 +20,8 @@ void ordenar(int* vet, int n){
         }
     }
 
-    printf("Quantidade de comparacoes: %d\n", comparacoes);
-    printf("Quantidade de trocas: %d\n", troca);
+    printf("Quantidade de comparacoes: %lld\n", comparacoes);
+    printf("Quantidade de trocas: %lld\n", troca);
 }
 
 
