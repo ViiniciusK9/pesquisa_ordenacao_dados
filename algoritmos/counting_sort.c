@@ -28,6 +28,7 @@ void ordenar(int* vet, int n, int k){
     
 }
 
+
 int maior(int* vet, int n){
     int aux_maior = 0; 
     for (int i = 0; i < n; i++)
