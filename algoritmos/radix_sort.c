@@ -86,8 +86,5 @@ int main(){
 
     printf("\nGastou %u milisegundos\n", diff); 
 
-    printf("Vetor ordenado: ");
-    print_vet(vet, n);
-
     return 0;
 } 
