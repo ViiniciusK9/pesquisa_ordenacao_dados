@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <sys\timeb.h>
+#include <time.h>
 
 
 void ordenar(int* vet, int n, int k){
@@ -9,8 +9,7 @@ void ordenar(int* vet, int n, int k){
     for (int i = 0; i < n; i++)
     {
         aux[vet[i]] = + 1;
-    }
-    //print_vet(aux, k);    
+    }    
 
     int index = 0;
     for (int i = 0; i < k; i++)
@@ -51,8 +50,7 @@ void print_vet(int* vet, int n){
 
 
 int main(){
-    struct timeb start, end;
-    int diff;
+    clock_t t;
     int n, i;
     int *vet;
     int k;
@@ -64,15 +62,15 @@ int main(){
     for(i = 0; i < n; i++){
         scanf("%d", &vet[i]);
     }
-
-    ftime(&start);
+    
     k = maior(vet, n);
+    t = clock();
+    
     ordenar(vet, n, k+1);
 
-    ftime(&end);
-    diff = (int) (1000.0 * (end.time - start.time) + (end.millitm - start.millitm));
+    t = clock() - t;
 
-    printf("\nGastou %u milisegundos\n", diff); 
+    printf("Tempo de execucao: %.2lf\n", ((double)t)/((CLOCKS_PER_SEC/1000)));
 
     return 0;
 }
