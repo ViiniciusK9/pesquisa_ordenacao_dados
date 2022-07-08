@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <sys\timeb.h>
+#include <time.h>
 
 
 int pai(int i){
@@ -99,8 +99,7 @@ void print_vet(int* vet, int n){
 }
 
 int main(){
-    struct timeb start, end;
-    int diff;
+    clock_t t;
     int n, i;
     int *vet;
 
@@ -112,14 +111,12 @@ int main(){
         scanf("%d", &vet[i]);
     }
 
-    ftime(&start);
+    t = clock();
 
     heap_sort(vet, n);
 
-    ftime(&end);
-    diff = (int) (1000.0 * (end.time - start.time) + (end.millitm - start.millitm));
-
-    printf("\nGastou %u milisegundos\n", diff);
+    t = clock() - t;
+    printf("Tempo de execucao: %.2lf\n", ((double)t)/((CLOCKS_PER_SEC/1000)));
 
     return 0;
 }
