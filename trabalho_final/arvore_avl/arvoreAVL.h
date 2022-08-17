@@ -1,3 +1,9 @@
+/*
+    Algoritmo desenvolvido durante o curso de estruturas de dados
+    do professor douglas maioli. link do curso abaixo:
+    https://cursos.professordouglasmaioli.com.br/course/view.php?id=7
+*/
+
 #include <iostream>
 #include "../contact.h"
 

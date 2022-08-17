@@ -1,3 +1,9 @@
+/*
+    Algoritmo desenvolvido durante o curso de estruturas de dados
+    do professor Douglas Maioli. link do curso abaixo:
+    https://cursos.professordouglasmaioli.com.br/course/view.php?id=7
+*/
+
 #include <iostream>
 #include <cstddef>
 #include "arvore_binaria.h"
