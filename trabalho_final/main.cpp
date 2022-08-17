@@ -9,6 +9,28 @@
 
 using namespace std;
 
+// função responsavel por formatar a data de (dia,mes,ano) para (dia/mes/ano)
+string data_feia_to_data_bonita(string data)
+{
+    string aux = data + ",";
+    string aux_r = "";
+    string space_delimiter = ",";
+    vector<string> words{};
+
+    size_t pos = 0;
+    while ((pos = aux.find(space_delimiter)) != string::npos) {
+        words.push_back(aux.substr(0, pos));
+        aux.erase(0, pos + space_delimiter.length());
+    }
+
+    aux_r += words[0] + "/";
+    aux_r += words[1] + "/";
+    aux_r += words[2];
+       
+    return aux_r;
+}
+
+
 int main(){
     ArvoreAVL TreeContatcAVL;
     ArvoreBinaria TreeContatcB;
@@ -42,14 +64,19 @@ int main(){
             words.push_back(aux.substr(0, pos));
             aux.erase(0, pos + space_delimiter.length());
         }
-
+        
+        if (arquivo.eof())
+        {
+            break;
+        }
+        
         name = words[0];
         day = stoi(words[1]);
         month = stoi(words[2]);
         year = stoi(words[3]);
         email = words[4];
         phone = words[5];
-        cout << name << day << month << year << email << phone << '\n';
+        //cout << name << day << month << year << email << phone << '\n';
 
         Date date(day, month, year);
         Date date2(day, month, year);
@@ -103,6 +130,7 @@ int main(){
             } else{            
                 TreeContatcAVL.inserir(contact);
                 TreeContatcB.inserir(contact2);
+                cout << "\nContato foi inserido com sucesso!\n";
             }
             break;
         }
@@ -118,10 +146,12 @@ int main(){
             Contact contact2(name, date, email, phone);
             TreeContatcAVL.remover(contact);
             TreeContatcB.remover(contact2);
+            cout << "\nContato " << name << " removido com sucesso!\n";
             break;
         }
         case 3:
         {
+            cout << "\nLista de contatos:\n";
             TreeContatcAVL.imprimirEmOrdem(TreeContatcAVL.getRaiz());
             break;   
         }     
@@ -135,14 +165,13 @@ int main(){
             Contact contact(name, date, email, phone);
             TreeContatcB.buscar(contact, busca);
             if (busca){
-                cout << "Contato encontrado!\n";
+                cout << "\nContato encontrado!\n";
                 cout << "Nome: " << contact.getNome() << endl;
-                cout << "Data de nascimento: ";
-                contact.getDate();
+                cout << "Data de nascimento: " << data_feia_to_data_bonita(contact.getDate()) << endl;
                 cout << "Email: " << contact.getEmail() << endl;
                 cout << "Phone: " << contact.getPhone() << endl;
             } else{
-                cout << "Contato nao encontrado!\n";
+                cout << "\nContato nao encontrado!\n";
             }     
             break;
         }
@@ -169,7 +198,9 @@ int main(){
             TreeContatcAVL.atualizar(contact2, busca);
             if (busca)
             {
-                cout << "Contato atualizado com sucesso!\n";
+                cout << "\nContato atualizado com sucesso!\n";
+            } else {
+                cout << "\nContato não encontrado\n";
             }
             
             break;
@@ -178,6 +209,7 @@ int main(){
         case 6:
         {
             TreeContatcAVL.salvar(TreeContatcAVL.getRaiz());
+            cout << "\nOs dados foram salvos com sucesso!\n";
             break;
         }
         default:

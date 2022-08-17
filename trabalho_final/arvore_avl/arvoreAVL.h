@@ -29,10 +29,10 @@ class ArvoreAVL{
     void atualizar(Contact contact, bool& busca);
     void imprimirEmOrdem(No* noAtual);
     
+    // auxiliares
     void salvar(No* noAtual);
     void salvarArvore(No* noAtual);
     
-
     // rotações
     void rotacaoDireita(No*& tree);
     void rotacaoEsquerda(No*& tree);

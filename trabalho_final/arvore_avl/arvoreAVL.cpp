@@ -212,7 +212,6 @@ using namespace std;
     void ArvoreAVL::salvarArvore(No* noAtual)
     {
         if(noAtual != NULL){
-            salvarArvore(noAtual->filhoesquerda);
 
             FILE *arq;
             arq = fopen("dados.txt", "at");
@@ -226,6 +225,7 @@ using namespace std;
             char const *c = aux.c_str();
             fputs(c, arq);
             fclose(arq);
+            salvarArvore(noAtual->filhoesquerda);
             salvarArvore(noAtual->filhodireita);
         }
     }
@@ -299,9 +299,9 @@ using namespace std;
             }
         } else if (pai->fatorB == 2) { // rotaciona para a esquerda
 
-            filho = pai->filhoesquerda;
+            filho = pai->filhodireita;
 
-            if (filho->fatorB == -1) { // simples para a esquerda
+            if (filho->fatorB == 1) { // simples para a esquerda
                 pai->fatorB = 0;
                 filho->fatorB = 0;
                 rotacaoEsquerda(pai);
@@ -310,7 +310,7 @@ using namespace std;
                 filho->fatorB = -1;
                 rotacaoEsquerda(pai);
             } else if (filho->fatorB == -1) { // rotacao dupla
-                neto = filho->filhodireita;
+                neto = filho->filhoesquerda;
                 if (neto->fatorB == -1) {
                     pai->fatorB = 0;
                     filho->fatorB = 1;
@@ -318,7 +318,7 @@ using namespace std;
                     pai->fatorB = 0;
                     filho->fatorB = 0;
                 } else if (filho->fatorB == 1) {
-                    pai->fatorB = 1;
+                    pai->fatorB = -1;
                     filho->fatorB = 0;
                 }
                 neto->fatorB = 0;
